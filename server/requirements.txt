@@ -1,6 +1,3 @@
-flask
-flask-cors
-flask-sqlalchemy
-faker
-requests
-python-dotenv
+Flask
+Flask-CORS
+SQLAlchemy

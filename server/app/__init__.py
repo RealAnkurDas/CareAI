@@ -1,9 +1,8 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from .config import Config
-
-db = SQLAlchemy()
+from .database import db
+from .routes.chatbot import chatbot_bp
 
 def create_app():
     app = Flask(__name__)
@@ -12,12 +11,6 @@ def create_app():
     CORS(app)
     db.init_app(app)
 
-    from .routes.chatbot import chatbot_bp
-    app.register_blueprint(chatbot_bp)
-
-    with app.app_context():
-        from . import database
-        database.init_db()
-        database.seed_data()
+    app.register_blueprint(chatbot_bp, url_prefix="/api")
 
     return app
